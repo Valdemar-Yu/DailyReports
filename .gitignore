@@ -1,0 +1,23 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+build/
+dist/
+*.egg-info/
+
+# Local/generated reports.
+reports/
+sample_reports/
+state/
+latest.md
+????-??-??.md
+
+# Local editor and OS files.
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

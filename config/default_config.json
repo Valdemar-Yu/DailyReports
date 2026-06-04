@@ -1,0 +1,206 @@
+{
+  "report": {
+    "title": "大小模型协同与 Agent 前沿日报",
+    "timezone": "Asia/Shanghai",
+    "output_dir": "D:\\DailyReports",
+    "state_dir": null,
+    "max_paper_repeats": 2,
+    "max_news_repeats": 2,
+    "max_papers": 12,
+    "max_news": 10
+  },
+  "ranking": {
+    "min_score": {
+      "paper": 8,
+      "news": 6
+    }
+  },
+  "topics": [
+    {
+      "name": "LLM/SLM 协同",
+      "weight": 5,
+      "terms": [
+        "large language model",
+        "small language model",
+        "large-small",
+        "small model",
+        "large model",
+        "model collaboration",
+        "collaborative inference",
+        "model routing",
+        "router",
+        "cascade",
+        "distillation",
+        "teacher model",
+        "student model",
+        "edge-cloud"
+      ]
+    },
+    {
+      "name": "Agent 与工具调用",
+      "weight": 5,
+      "terms": [
+        "agent",
+        "agents",
+        "agentic",
+        "multi-agent",
+        "autonomous agent",
+        "tool use",
+        "tool-use",
+        "function calling",
+        "computer use",
+        "workflow",
+        "planning",
+        "reflection",
+        "memory"
+      ]
+    },
+    {
+      "name": "推理与评测",
+      "weight": 3,
+      "terms": [
+        "reasoning",
+        "long-horizon",
+        "benchmark",
+        "evaluation",
+        "verifier",
+        "self-correction",
+        "reinforcement learning",
+        "test-time compute",
+        "inference-time scaling"
+      ]
+    },
+    {
+      "name": "基础模型与产业动态",
+      "weight": 4,
+      "terms": [
+        "foundation model",
+        "frontier model",
+        "language model",
+        "multimodal model",
+        "open weights",
+        "model release",
+        "GPT",
+        "Claude",
+        "Gemini",
+        "Llama",
+        "Qwen",
+        "DeepSeek",
+        "Kimi",
+        "GLM",
+        "Mistral"
+      ]
+    }
+  ],
+  "arxiv": {
+    "enabled": true,
+    "api_enabled": false,
+    "max_results_per_query": 50,
+    "lookback_days": 14,
+    "request_delay_seconds": 3.1,
+    "timeout_seconds": 15,
+    "categories": [
+      "cs.AI",
+      "cs.CL",
+      "cs.LG",
+      "cs.MA",
+      "cs.HC",
+      "cs.SE"
+    ],
+    "rss_fallback": {
+      "enabled": true,
+      "base_url": "https://rss.arxiv.org/rss",
+      "lookback_days": 14,
+      "timeout_seconds": 15,
+      "max_items_per_category": 80,
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.LG",
+        "cs.MA",
+        "cs.HC",
+        "cs.SE"
+      ]
+    },
+    "queries": [
+      {
+        "name": "LLM agents",
+        "terms": [
+          "agent",
+          "agents",
+          "LLM agent",
+          "multi-agent",
+          "tool use",
+          "computer use",
+          "workflow"
+        ]
+      },
+      {
+        "name": "Large-small model collaboration",
+        "terms": [
+          "small language model",
+          "large-small",
+          "model collaboration",
+          "collaborative inference",
+          "model routing",
+          "cascade",
+          "distillation"
+        ]
+      },
+      {
+        "name": "Agent reasoning and planning",
+        "terms": [
+          "planning",
+          "reasoning",
+          "memory",
+          "reflection",
+          "self-correction",
+          "long-horizon",
+          "verifier"
+        ]
+      }
+    ]
+  },
+  "news": {
+    "enabled": true,
+    "lookback_days": 14,
+    "timeout_seconds": 12,
+    "max_workers": 6,
+    "feeds": [
+      {
+        "name": "OpenAI News",
+        "url": "https://openai.com/news/rss.xml"
+      },
+      {
+        "name": "Google Research Blog",
+        "url": "https://research.google/blog/rss/"
+      },
+      {
+        "name": "Google DeepMind Blog",
+        "url": "https://deepmind.google/discover/blog/rss.xml"
+      },
+      {
+        "name": "Meta AI Blog",
+        "url": "https://ai.meta.com/blog/rss/"
+      },
+      {
+        "name": "Microsoft Research Blog",
+        "url": "https://www.microsoft.com/en-us/research/feed/"
+      },
+      {
+        "name": "NVIDIA Blog",
+        "url": "https://blogs.nvidia.com/feed/"
+      }
+    ]
+  },
+  "notifications": {
+    "github_issue": {
+      "enabled": false,
+      "repository": "",
+      "labels": [
+        "daily-report",
+        "research"
+      ]
+    }
+  }
+}
