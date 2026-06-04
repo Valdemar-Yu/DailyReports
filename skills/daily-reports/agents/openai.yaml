@@ -1,0 +1,4 @@
+interface:
+  display_name: "DailyReports"
+  short_description: "Generate AI research daily reports"
+  default_prompt: "Use $daily-reports to generate the DailyReports research report."
