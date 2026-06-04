@@ -21,21 +21,21 @@ python -m daily_research_report --sample --output-dir D:\DailyReports
 真实抓取：
 
 ```powershell
-python -m daily_research_report --config config\default_config.json --output-dir D:\DailyReports
+python -m daily_research_report --config config\default_config.json --output-dir  /output/dir
 ```
 
 安装为命令行工具：
 
 ```powershell
 python -m pip install -e .
-daily-research-report --config config\default_config.json --output-dir D:\DailyReports
+daily-research-report --config config\default_config.json --output-dir /output/dir
 ```
 
 ## 配置
 
 主要配置在 `config/default_config.json`：
 
-- `report.output_dir`：本地报告目录，默认 `D:\DailyReports`。
+- `report.output_dir`：本地报告目录，默认 `/output/dir`。
 - `report.max_paper_repeats`：同一论文最多进入日报的次数，默认 `2`。
 - `topics`：你的研究兴趣画像及权重。
 - `arxiv.queries`：arXiv 检索主题。
@@ -62,7 +62,7 @@ daily-research-report --config config\default_config.json --output-dir D:\DailyR
 
 ## Windows 本地定时
 
-可以用任务计划程序每天本地生成到 `D:\DailyReports`：
+可以用任务计划程序每天本地生成到 `/output/dir`：
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts\Register-DailyReportTask.ps1 -At 08:30
