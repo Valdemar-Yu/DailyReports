@@ -9,12 +9,16 @@ build/
 dist/
 *.egg-info/
 
-# Local/generated reports.
+# Local/generated reports and dedup state.
 reports/
 sample_reports/
 state/
 latest.md
 ????-??-??.md
+*-daily-report.md
+*-papers.json
+paper-history.json
+DailyReports/
 
 # Local editor and OS files.
 .DS_Store

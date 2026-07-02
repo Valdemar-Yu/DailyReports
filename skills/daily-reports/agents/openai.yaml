@@ -1,4 +1,4 @@
 interface:
   display_name: "DailyReports"
-  short_description: "Generate AI research daily reports"
-  default_prompt: "Use $daily-reports to generate the DailyReports research report."
+  short_description: "Daily digest: edge-cloud omni, agent memory & self-evolving"
+  default_prompt: "Use $daily-reports to produce today's paper and industry digest for my research direction."

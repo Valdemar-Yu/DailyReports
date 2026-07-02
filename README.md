@@ -1,54 +1,71 @@
-# 大小模型协同与 Agent 前沿日报
+# 端云协同 Omni · Agent 记忆与自进化 前沿日报
 
-这是一个面向“大模型/小模型协同、Agent、多智能体、工具调用、推理与评测、基础模型发布动态”的每日研究报告生成器。它会抓取论文与实验室/公司资讯，按你的研究画像打分排序，并把 Markdown 日报保存到 `D:\DailyReports`。
+这是一个每日研究情报生成器。它面向下面几个方向抓取论文与产业资讯，按研究画像打分排序，产出 Markdown 日报：
 
-## 功能
+- 端云协同（edge-cloud）的 omni 基础模型，偏向视频，兼顾语音
+- 实时全双工交互（full-duplex / turn-taking / barge-in / 打断转交）
+- Agent 记忆：对话记忆 / 工作记忆 / 长期记忆
+- Agent 自进化（self-evolving / self-improving / continual learning）
 
-- 每日抓取 arXiv 分类 RSS 与 AI 实验室/公司 RSS 动态；也可手动开启 arXiv Search API 做更精准检索。
-- 面向“大小模型协同 + Agent”关键词画像做相关度排序。
-- 同一篇论文默认最多推送 2 次，第三次开始跳过；同一天多次运行不重复计数。
-- 本地默认输出到 `D:\DailyReports\YYYY-MM-DD.md`，同时写入 `latest.md`。
-- 可用 GitHub Actions 每天自动运行，并把 `reports/` 与去重状态提交回仓库。
-- 可选 GitHub Issue 推送，便于把日报当成订阅流。
+它有两种用法：
 
-## 快速开始
+- **Agent 技能**（`skills/daily-reports/`）：由 agent 读画像、检索、去重并撰写中文日报，适合交互式、带解读的推送。
+- **Python 自动生成器**（`daily_research_report/`）：抓取 arXiv RSS/API 与实验室 RSS，按 `config/default_config.json` 打分，适合无人值守跑批或生成候选列表。
 
-```powershell
-cd D:\DailyReports
-python -m daily_research_report --sample --output-dir D:\DailyReports
+## 研究画像
+
+- 画像文件：`config/research-profile.md`（唯一事实源；方向变了改这里）。
+- 关键词与来源图谱：`skills/daily-reports/references/source-map.md`。
+- Python 自动路径的画像与阈值：`config/default_config.json` 的 `topics` / `ranking.min_score` / `arxiv.categories`。
+
+## 快速开始（macOS / Linux）
+
+```bash
+# 示例数据（不联网）
+python3 -m daily_research_report --sample
+
+# 真实抓取（默认输出到 ~/DailyReports）
+python3 -m daily_research_report --config config/default_config.json
+
+# 或用封装脚本
+scripts/run_daily_report.sh
+scripts/run_daily_report.sh --dry-run
 ```
 
-真实抓取：
+Windows（PowerShell）：
 
 ```powershell
-python -m daily_research_report --config config\default_config.json --output-dir  /output/dir
+python -m daily_research_report --config config\default_config.json
 ```
 
 安装为命令行工具：
 
-```powershell
-python -m pip install -e .
-daily-research-report --config config\default_config.json --output-dir /output/dir
+```bash
+python3 -m pip install -e .
+daily-research-report --config config/default_config.json
 ```
 
-## 配置
+## 输出与去重
 
-主要配置在 `config/default_config.json`：
+- 报告默认写到 `~/DailyReports/`（可用环境变量 `DAILY_REPORT_OUTPUT_DIR` 覆盖，或改 `config/default_config.json` 的 `report.output_dir`）。
+- Python 路径产出 `YYYY-MM-DD.md` 与 `latest.md`；agent 技能产出 `YYYY-MM-DD-daily-report.md` 与 `YYYY-MM-DD-papers.json`。
+- 同一篇论文默认最多推送 2 次；agent 技能的去重计数由 `skills/daily-reports/scripts/paper_history.py` 维护（默认 `~/DailyReports/paper-history.json`，可用 `DAILY_REPORT_HISTORY` 覆盖）。
 
-- `report.output_dir`：本地报告目录，默认 `/output/dir`。
-- `report.max_paper_repeats`：同一论文最多进入日报的次数，默认 `2`。
-- `topics`：你的研究兴趣画像及权重。
-- `arxiv.queries`：arXiv 检索主题。
-- `arxiv.api_enabled`：是否启用 arXiv Search API，默认 `false`，避免本地网络下的超时和 429。
-- `arxiv.rss_fallback`：默认论文源，按 arXiv 分类 RSS 抓取后再用关键词画像筛选。
-- `news.feeds`：OpenAI、Google Research、DeepMind、Meta AI、Microsoft Research、NVIDIA 等资讯源；Anthropic、Mistral、Qwen、DeepSeek、Kimi 等可在确认 RSS 后自行追加。
-- `ranking.min_score`：论文/资讯进入日报的最低相关度。
+## 配置要点（`config/default_config.json`）
 
-## GitHub Actions
+- `topics`：研究兴趣画像与权重（视频、记忆、自进化为最高权重）。
+- `arxiv.categories` / `rss_fallback.categories`：arXiv 分类，已含 cs.CV / cs.MM / cs.MA / eess.AS / cs.SD。
+- `arxiv.api_enabled`：是否启用 arXiv Search API，默认 `false`（用 RSS 兜底更稳，避免超时和 429）。
+- `news.feeds`：实验室 / 公司 RSS，可自行增删。
+- `ranking.min_score`：论文 / 资讯进入日报的最低相关度。
 
-仓库内置 `.github/workflows/daily-report.yml`，每天 00:00 UTC 运行一次，也就是北京时间 08:00。GitHub Actions 环境没有 `D:` 盘，所以工作流会把报告写到仓库内的 `reports/`，并提交报告与 `reports/state/seen.json` 去重状态。
+## 定时任务
 
-如需把日报发成 GitHub Issue，把 `config/default_config.json` 中的配置改为：
+- **GitHub Actions**：内置 `.github/workflows/daily-report.yml`，每天 00:00 UTC（北京时间 08:00）运行，把报告写到仓库 `reports/` 并提交。
+- **macOS / Linux**：用 `cron` 或 `launchd` 每天调用 `scripts/run_daily_report.sh`，例如 crontab：`30 8 * * * /path/to/repo/scripts/run_daily_report.sh`。
+- **Windows**：`scripts/Register-DailyReportTask.ps1` 注册任务计划程序。
+
+如需把日报发成 GitHub Issue，在 `config/default_config.json` 打开：
 
 ```json
 "notifications": {
@@ -60,37 +77,11 @@ daily-research-report --config config\default_config.json --output-dir /output/d
 }
 ```
 
-## Windows 本地定时
-
-可以用任务计划程序每天本地生成到 `/output/dir`：
-
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts\Register-DailyReportTask.ps1 -At 08:30
-```
-
 ## 开发与测试
 
-```powershell
-python -m unittest discover -s tests
-python -m daily_research_report --sample --dry-run --date 2026-06-04
-```
-
-## 开源发布到 GitHub
-
-如果你已经在 GitHub 上创建了空仓库：
-
-```powershell
-git branch -M main
-git remote add origin https://github.com/<your-name>/<repo-name>.git
-git add .
-git commit -m "feat: initial daily research reporter"
-git push -u origin main
-```
-
-如果你安装了 GitHub CLI，也可以直接创建公开仓库：
-
-```powershell
-gh repo create <repo-name> --public --source . --remote origin --push
+```bash
+python3 -m unittest discover -s tests
+python3 -m daily_research_report --sample --dry-run --date 2026-06-04
 ```
 
 ## 数据源说明
@@ -99,3 +90,7 @@ gh repo create <repo-name> --public --source . --remote origin --push
 - 定时任务使用 GitHub Actions schedule：<https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#onschedule>
 
 RSS 源偶尔会改版或失效，脚本会跳过失败源并在日报的“抓取告警”中记录。你可以在 `news.feeds` 中继续增加公司博客、模型发布页、团队新闻或 Google News RSS。
+
+## License
+
+本项目使用 [MIT License](./LICENSE)。
