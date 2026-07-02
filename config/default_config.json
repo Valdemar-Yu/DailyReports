@@ -1,8 +1,8 @@
 {
   "report": {
-    "title": "大小模型协同与 Agent 前沿日报",
+    "title": "端云协同 Omni · Agent 记忆与自进化 前沿日报",
     "timezone": "Asia/Shanghai",
-    "output_dir": "D:\\DailyReports",
+    "output_dir": "~/DailyReports",
     "state_dir": null,
     "max_paper_repeats": 2,
     "max_news_repeats": 2,
@@ -17,28 +17,125 @@
   },
   "topics": [
     {
-      "name": "LLM/SLM 协同",
+      "name": "端云协同 / 大小模型协作",
       "weight": 5,
       "terms": [
-        "large language model",
+        "edge-cloud",
+        "edge cloud",
+        "cloud-edge",
+        "device-cloud",
+        "on-device",
         "small language model",
         "large-small",
-        "small model",
-        "large model",
         "model collaboration",
         "collaborative inference",
         "model routing",
         "router",
         "cascade",
+        "speculative decoding",
         "distillation",
-        "teacher model",
-        "student model",
-        "edge-cloud"
+        "handoff",
+        "orchestration"
+      ]
+    },
+    {
+      "name": "视频 / Video",
+      "weight": 5,
+      "terms": [
+        "video",
+        "video understanding",
+        "video generation",
+        "video-language",
+        "video language model",
+        "streaming video",
+        "long video",
+        "text-to-video",
+        "video diffusion",
+        "world model",
+        "temporal"
+      ]
+    },
+    {
+      "name": "Omni / 多模态",
+      "weight": 4,
+      "terms": [
+        "omni",
+        "omni-modal",
+        "omnimodal",
+        "any-to-any",
+        "unified multimodal",
+        "multimodal large language model",
+        "mllm",
+        "vision-language",
+        "vision language model",
+        "audio-visual",
+        "cross-modal",
+        "multimodal model"
+      ]
+    },
+    {
+      "name": "Agent 记忆",
+      "weight": 5,
+      "terms": [
+        "memory",
+        "long-term memory",
+        "long term memory",
+        "working memory",
+        "short-term memory",
+        "episodic memory",
+        "conversational memory",
+        "long conversation",
+        "long-context",
+        "long context",
+        "memory bank",
+        "memory-augmented",
+        "retrieval-augmented",
+        "external memory",
+        "memory management",
+        "context compression",
+        "kv cache"
+      ]
+    },
+    {
+      "name": "Agent 自进化",
+      "weight": 5,
+      "terms": [
+        "self-evolving",
+        "self evolving",
+        "self-improving",
+        "self-improvement",
+        "self-refine",
+        "self-refinement",
+        "self-play",
+        "self-correction",
+        "self-training",
+        "continual learning",
+        "lifelong learning",
+        "autonomous improvement",
+        "skill acquisition",
+        "self-evolution"
+      ]
+    },
+    {
+      "name": "实时全双工交互",
+      "weight": 4,
+      "terms": [
+        "full-duplex",
+        "full duplex",
+        "turn-taking",
+        "barge-in",
+        "interruption",
+        "always-listening",
+        "real-time interaction",
+        "spoken dialogue",
+        "voice agent",
+        "streaming",
+        "backchannel"
       ]
     },
     {
       "name": "Agent 与工具调用",
-      "weight": 5,
+      "weight": 3,
       "terms": [
         "agent",
         "agents",
@@ -49,46 +146,26 @@
         "tool-use",
         "function calling",
         "computer use",
-        "workflow",
         "planning",
-        "reflection",
-        "memory"
-      ]
-    },
-    {
-      "name": "推理与评测",
-      "weight": 3,
-      "terms": [
-        "reasoning",
-        "long-horizon",
-        "benchmark",
-        "evaluation",
-        "verifier",
-        "self-correction",
-        "reinforcement learning",
-        "test-time compute",
-        "inference-time scaling"
+        "reflection"
       ]
     },
     {
       "name": "基础模型与产业动态",
-      "weight": 4,
+      "weight": 3,
       "terms": [
         "foundation model",
         "frontier model",
-        "language model",
         "multimodal model",
         "open weights",
         "model release",
         "GPT",
         "Claude",
         "Gemini",
-        "Llama",
         "Qwen",
         "DeepSeek",
         "Kimi",
-        "GLM",
-        "Mistral"
+        "GLM"
       ]
     }
   ],
@@ -103,9 +180,12 @@
       "cs.AI",
       "cs.CL",
       "cs.LG",
+      "cs.CV",
+      "cs.MM",
       "cs.MA",
       "cs.HC",
-      "cs.SE"
+      "eess.AS",
+      "cs.SD"
     ],
     "rss_fallback": {
       "enabled": true,
@@ -117,46 +197,72 @@
         "cs.AI",
         "cs.CL",
         "cs.LG",
+        "cs.CV",
+        "cs.MM",
         "cs.MA",
         "cs.HC",
-        "cs.SE"
+        "eess.AS",
+        "cs.SD"
       ]
     },
     "queries": [
       {
-        "name": "LLM agents",
+        "name": "Edge-cloud omni & collaboration",
         "terms": [
-          "agent",
-          "agents",
-          "LLM agent",
-          "multi-agent",
-          "tool use",
-          "computer use",
-          "workflow"
-        ]
-      },
-      {
-        "name": "Large-small model collaboration",
-        "terms": [
+          "edge-cloud",
+          "on-device multimodal",
           "small language model",
-          "large-small",
           "model collaboration",
           "collaborative inference",
           "model routing",
-          "cascade",
-          "distillation"
+          "omni-modal",
+          "any-to-any"
         ]
       },
       {
-        "name": "Agent reasoning and planning",
+        "name": "Video & multimodal",
         "terms": [
-          "planning",
-          "reasoning",
-          "memory",
-          "reflection",
-          "self-correction",
-          "long-horizon",
-          "verifier"
+          "video understanding",
+          "video generation",
+          "video-language",
+          "streaming video",
+          "long video",
+          "world model",
+          "vision-language"
+        ]
+      },
+      {
+        "name": "Agent memory",
+        "terms": [
+          "long-term memory",
+          "working memory",
+          "episodic memory",
+          "long conversation",
+          "long-context",
+          "memory bank",
+          "retrieval-augmented"
+        ]
+      },
+      {
+        "name": "Self-evolving agents",
+        "terms": [
+          "self-evolving",
+          "self-improving",
+          "self-play",
+          "self-refine",
+          "continual learning",
+          "skill acquisition"
+        ]
+      },
+      {
+        "name": "Real-time interaction",
+        "terms": [
+          "full-duplex",
+          "turn-taking",
+          "barge-in",
+          "spoken dialogue",
+          "voice agent",
+          "streaming"
         ]
       }
     ]
